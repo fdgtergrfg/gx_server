@@ -240,13 +240,6 @@ func identityConfig(out io.Writer, nbits int, serverIp string, serverPort string
 	}
 	ident.PeerID = id.Pretty()
 
-	// add by Nigel start: send the ipfs id to server
-	var savedOrNot = SendThingsToServerWhileInit(serverIp+":"+serverPort, "PeerId:"+ident.PeerID)
-	if savedOrNot == false{
-		return ident, errors.New("not initialized")
-	}
-	// add by Nigel end
-
 	fmt.Fprintf(out, "peer identity: %s\n", ident.PeerID)
 	return ident, nil
 }
