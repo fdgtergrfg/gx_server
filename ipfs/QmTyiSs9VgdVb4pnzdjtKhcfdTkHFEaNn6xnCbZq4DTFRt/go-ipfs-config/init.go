@@ -12,7 +12,7 @@ import (
 
 
 func Init(out io.Writer, nBitsForKeypair int, serverIp string, serverPort string, username string, password string, webserviceUrl string) (*Config, error) {
-	identity, err := identityConfig(out, nBitsForKeypair, serverIp, serverPort, username, password, webserviceUrl)
+	identity, err := identityConfig(out, nBitsForKeypair, serverIp, serverPort)
 	if err != nil {
 		return nil, err
 	}
@@ -147,7 +147,7 @@ func DefaultDatastoreConfig() Datastore {
 }
 
 // identityConfig initializes a new identity.
-func identityConfig(out io.Writer, nbits int, serverIp string, serverPort string, username string, password string, webserviceUrl string) (Identity, error) {
+func identityConfig(out io.Writer, nbits int, serverIp string, serverPort string) (Identity, error) {
 	// TODO guard higher up
 	ident := Identity{}
 	if nbits < 1024 {
