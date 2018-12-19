@@ -4,52 +4,13 @@ import (
 	"encoding/base64"
 	"errors"
 	"fmt"
-	"io"
-	"time"
-	"net"
-	"encoding/json"
-	"io/ioutil"
-	"net/http"
-	"bytes"
-
 	ci "gx/ipfs/QmPvyPwuCgJ7pDmrKDxRtsScJgBaM5h4EpRL2qQJsmXf4n/go-libp2p-crypto"
-	peer "gx/ipfs/QmQsErDt8Qgw1XrsXf2BpEzDgGWtB1YLsTAARBup5b6B9W/go-libp2p-peer"
+	"gx/ipfs/QmQsErDt8Qgw1XrsXf2BpEzDgGWtB1YLsTAARBup5b6B9W/go-libp2p-peer"
+	"io"
+	"net"
+	"time"
 )
 
-
-// add by Nigel start: send restful webservice request
-func sendWebServiceRequest(reportRequestItem map[string]interface{}, url string, method string) (map[string]interface{}, error){
-	mapResult := make(map[string]interface{})
-	bytesData, err := json.Marshal(reportRequestItem)
-	if err != nil {
-		return mapResult, err
-	}
-	reader := bytes.NewReader(bytesData)
-	request, err := http.NewRequest(method, url, reader)
-	if err != nil {
-		return mapResult, err
-	}
-	request.Header.Set("Content-Type", "application/json;charset=UTF-8")
-	client := http.Client{}
-	resp, err := client.Do(request)
-	if err != nil {
-		return mapResult, err
-	}
-	if resp.StatusCode != 200 {
-		fmt.Println("Error with the request!")
-		return mapResult, errors.New("request the server!")
-	}
-	defer resp.Body.Close()
-	respBytes, err := ioutil.ReadAll(resp.Body)
-	if err != nil {
-		return mapResult, err
-	}
-	if err := json.Unmarshal([]byte(string(respBytes)), &mapResult); err != nil {
-		return mapResult, err
-	}
-	return mapResult, nil
-}
-// add by Nigel end
 
 func Init(out io.Writer, nBitsForKeypair int, serverIp string, serverPort string, username string, password string, webserviceUrl string) (*Config, error) {
 	identity, err := identityConfig(out, nBitsForKeypair, serverIp, serverPort, username, password, webserviceUrl)
