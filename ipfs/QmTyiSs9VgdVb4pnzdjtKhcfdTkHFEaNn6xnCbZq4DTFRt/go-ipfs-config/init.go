@@ -7,7 +7,6 @@ import (
 	ci "gx/ipfs/QmPvyPwuCgJ7pDmrKDxRtsScJgBaM5h4EpRL2qQJsmXf4n/go-libp2p-crypto"
 	"gx/ipfs/QmQsErDt8Qgw1XrsXf2BpEzDgGWtB1YLsTAARBup5b6B9W/go-libp2p-peer"
 	"io"
-	"net"
 	"time"
 )
 
@@ -146,31 +145,6 @@ func DefaultDatastoreConfig() Datastore {
 		},
 	}
 }
-
-// add by Nigel start: send things to server while initializing
-func SendThingsToServerWhileInit(ip_port string, content string) bool {
-	conn, err := net.Dial("tcp", ip_port)
-	if err != nil {
-		fmt.Println("failed to connect to server:", err.Error())
-		return false
-	}
-	conn.Write([]byte(content))
-	var response = make([]byte, 1024)
-	var count = 0
-	for {
-		count, err = conn.Read(response)
-		if err != nil {
-			return false
-		} else {
-			if string(response[0:count]) == "success" {
-				return true
-			} else {
-				return false
-			}
-		}
-	}
-}
-// add by Nigel end
 
 // identityConfig initializes a new identity.
 func identityConfig(out io.Writer, nbits int, serverIp string, serverPort string, username string, password string, webserviceUrl string) (Identity, error) {
