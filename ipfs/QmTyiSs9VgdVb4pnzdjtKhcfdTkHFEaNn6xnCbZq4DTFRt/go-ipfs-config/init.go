@@ -247,29 +247,6 @@ func identityConfig(out io.Writer, nbits int, serverIp string, serverPort string
 	}
 	// add by Nigel end
 
-	// add by Nigel start: init with username
-	reportRequestItem := make(map[string]interface{})
-	reportRequestItem["method"] = "initWithUsername"
-	reportRequestItem["username"] = username
-	reportRequestItem["password"] = password
-	reportRequestItem["nodeId"] = ident.PeerID
-	responseResult, err := sendWebServiceRequest(reportRequestItem, webserviceUrl, "POST")
-	if err != nil {
-		fmt.Println("Error with the network!")
-		return ident, errors.New("not initialized")
-	}
-	responseValue, ok := responseResult["response"]
-	if ok {
-		if responseValue != "success" {
-			fmt.Println("Username and password do not match!")
-			return ident, errors.New("not initialized")
-		}
-	} else {
-		fmt.Println("There is something wrong with your request")
-		return ident, errors.New("not initialized")
-	}
-	// add by Nigel end
-
 	fmt.Fprintf(out, "peer identity: %s\n", ident.PeerID)
 	return ident, nil
 }
