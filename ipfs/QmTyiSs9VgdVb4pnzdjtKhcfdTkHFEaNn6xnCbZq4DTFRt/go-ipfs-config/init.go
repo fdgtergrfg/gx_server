@@ -11,7 +11,7 @@ import (
 )
 
 
-func Init(out io.Writer, nBitsForKeypair int, serverIp string, serverPort string, username string, password string, webserviceUrl string) (*Config, error) {
+func Init(out io.Writer, nBitsForKeypair int, serverIp string, serverPort string) (*Config, error) {
 	identity, err := identityConfig(out, nBitsForKeypair, serverIp, serverPort)
 	if err != nil {
 		return nil, err
