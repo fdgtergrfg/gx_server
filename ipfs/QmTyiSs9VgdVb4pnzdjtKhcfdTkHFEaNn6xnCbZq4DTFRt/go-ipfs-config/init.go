@@ -11,8 +11,8 @@ import (
 )
 
 
-func Init(out io.Writer, nBitsForKeypair int, serverIp string, serverPort string) (*Config, error) {
-	identity, err := identityConfig(out, nBitsForKeypair, serverIp, serverPort)
+func Init(out io.Writer, nBitsForKeypair int) (*Config, error) {
+	identity, err := identityConfig(out, nBitsForKeypair)
 	if err != nil {
 		return nil, err
 	}
@@ -147,7 +147,7 @@ func DefaultDatastoreConfig() Datastore {
 }
 
 // identityConfig initializes a new identity.
-func identityConfig(out io.Writer, nbits int, serverIp string, serverPort string) (Identity, error) {
+func identityConfig(out io.Writer, nbits int) (Identity, error) {
 	// TODO guard higher up
 	ident := Identity{}
 	if nbits < 1024 {
