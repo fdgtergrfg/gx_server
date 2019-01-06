@@ -30,7 +30,7 @@ var DefaultBootstrapAddresses = []string{
 	//"/ip6/2400:6180:0:d0::151:6001/tcp/4001/ipfs/QmSoLSafTMBsPKadTEgaXctDQVcqN88CNLHXMkTNwMKPnu",  // saturn.i.ipfs.io
 	//"/ip6/2604:a880:800:10::4a:5001/tcp/4001/ipfs/QmSoLV4Bbm51jM9C4gDYZQ9Cy3U6aXMJDAbzgu2fzaDs64", // venus.i.ipfs.io
 	//"/ip6/2a03:b0c0:0:1010::23:1001/tcp/4001/ipfs/QmSoLer265NRgSp2LA3dPaeykiS1J6DifTC88f5uVQKNAd", // earth.i.ipfs.io
-	"/ip4/47.105.76.115/tcp/4001/ipfs/QmTXvThuPMHgQyALXVKQYkeaFeMEdA9sQKK6CSqo1Qa7yy",
+	//"/ip4/47.105.76.115/tcp/4001/ipfs/QmTXvThuPMHgQyALXVKQYkeaFeMEdA9sQKK6CSqo1Qa7yy", // this is also removed, because a server will not have any bootstrap, if it is the first server
 }
 
 // BootstrapPeer is a peer used to bootstrap the network.
